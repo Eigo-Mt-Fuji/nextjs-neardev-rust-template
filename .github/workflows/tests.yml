@@ -50,5 +50,4 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          project: frontend
           start: npm run dev:frontend
