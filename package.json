@@ -14,7 +14,7 @@
     "lint": "next lint",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "npm run test:unit:contract",
-    "test:unit:contract": "cd contract && cargo test -- --nocapture",
+    "test:unit:contract": "cd contracts/ && cargo test -- --nocapture",
     "test:integration": "npm run test:integration:rs && npm run test:integration:ts",
     "test:integration:rs": "npm run build:contract && npm run postbuild:contract && cd contracts/integration-tests/rs && cargo run --example integration-tests",
     "test:integration:ts": "npm run build:frontend && cypress open",
