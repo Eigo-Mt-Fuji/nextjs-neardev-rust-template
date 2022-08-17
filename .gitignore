@@ -60,3 +60,8 @@ next-env.d.ts
 /.serverless/
 /.serverless_nextjs/
 
+
+# terraform
+
+/terraform/components/backend/.terraform/*
+/terraform/components/backend/terraform.plan

@@ -11,7 +11,7 @@
             "Action": [
                 "s3:ListBucket"
             ],
-            "Resource": "arn:aws:s3:::${bucket_name}"
+            "Resource": "arn:aws:s3:::*"
         },
         {
             "Effect": "Allow",
@@ -19,7 +19,7 @@
                 "s3:GetObject",
                 "s3:PutObject"
             ],
-            "Resource": "arn:aws:s3:::${bucket_name}/*"
+            "Resource": "*"
         },
 
         {

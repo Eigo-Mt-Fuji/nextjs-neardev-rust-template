@@ -1,4 +1,4 @@
 variable "repository_name_front" {
-    default = "Eigo-Mt-Fuji/awesome-rust-dapp"               
+    default = "Eigo-Mt-Fuji/nextjs-neardev-rust-template"               
 }
 

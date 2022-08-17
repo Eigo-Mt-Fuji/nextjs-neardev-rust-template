@@ -5,7 +5,7 @@ cd terraform/components/backend/
 ```
 
 ```
-terraform workspace select prd
+terraform workspace select test
 ```
 
 ```

@@ -1,7 +1,7 @@
 resource "aws_iam_role" "this" {
     provider = aws.efgriver_global_devops
 
-    name = "${terraform.workspace}FxReportGithubWorkflow"
+    name = "${terraform.workspace}NextJsNeardevRustTemplateGithubWorkflow"
     # https://dev.classmethod.jp/articles/create-iam-id-provider-for-github-actions-with-management-console/
     assume_role_policy = templatefile("${path.module}/templates/github-workflow-assume-role-policy.json", {
         federated_provider_id = aws_iam_openid_connect_provider.this.id
@@ -37,11 +37,10 @@ resource "aws_iam_openid_connect_provider" "this" {
 resource "aws_iam_policy" "this_sts" {
   provider = aws.efgriver_global_devops
   
-  name        = "${terraform.workspace}FxReportGithubWorkflowPolicy"
-  description = "${terraform.workspace}FxReportGithubWorkflowPolicy"
+  name        = "${terraform.workspace}NextJsNeardevRustTemplateGithubWorkflowPolicy"
+  description = "${terraform.workspace}NextJsNeardevRustTemplateGithubWorkflowPolicy"
 
   policy = templatefile("${path.module}/templates/github-workflow-iam-policy.json", {
-      bucket_name = aws_s3_bucket.this.bucket
   })
 }
 
