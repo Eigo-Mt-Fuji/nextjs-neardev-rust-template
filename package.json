@@ -18,7 +18,7 @@
     "test:integration": "npm run test:integration:rs && npm run test:integration:ts",
     "test:integration:rs": "npm run build:contract && npm run postbuild:contract && cd contracts/integration-tests/rs && cargo run --example integration-tests",
     "test:integration:ts": "npm run build:frontend && cypress open",
-    "deploy:serverless:test": "cp serverless.test.yml serverless.yml && serverless && rm -rf serverless.yml",
+    "deploy:serverless:test": "cp serverless.test.yml serverless.yml && npx serverless@2.72.2 && rm -rf serverless.yml",
     "deploy:terraform:test": "cd ./terraform/components/backend/ && sh apply.sh && cd ../../../"
   },
   "dependencies": {
