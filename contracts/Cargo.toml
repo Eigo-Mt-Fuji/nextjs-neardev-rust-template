@@ -5,6 +5,7 @@ authors = ["e-fujikawa <efg.river@gmail.com>"]
 edition = "2018"
 
 [lib]
+# https://users.rust-lang.org/t/what-is-the-difference-between-dylib-and-cdylib/28847/3
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
