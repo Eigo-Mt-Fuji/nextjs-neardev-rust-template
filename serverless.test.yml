@@ -1,0 +1,39 @@
+# whatis serverless framework component: https://github.com/serverless/components
+# whatis @sls-next/serverless-component: https://github.com/serverless-nextjs/serverless-next.js
+org: efgriver
+app: awesome-rust-dapp
+stage: test
+awesomeRustDapp:
+  component: "@sls-next/serverless-component@3.7.0"
+  name: awesome-rust-dapp
+  inputs:
+    cloudfront:
+      # # if you want to use an existing cloudfront distribution, provide it here
+      distributionId: "E1WHCQULHESL5I"
+    bucketName: "v2j8wjn-k5ncpd8"
+    bucketRegion: "ap-northeast-1"
+    policy: "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    domain: [ "awesome-rust-dapp", "efgriver.com" ] # [ sub-domain, domain ]
+    domainMinimumProtocolVersion: "TLSv1.2_2021"
+    # TSL *.efgriver.com: https://us-east-1.console.aws.amazon.com/acm/home?region=us-east-1#/certificates/91defbde-5ced-4c62-b817-c4390fa4cbf7
+    certificateArn: arn:aws:acm:us-east-1:047980477351:certificate/91defbde-5ced-4c62-b817-c4390fa4cbf7
+    runtime: "nodejs16.x"
+    # https://github.com/serverless-nextjs/serverless-next.js#lambda-at-edge-configuration
+    memory:
+      defaultLambda: 1024
+      apiLambda: 2048
+      imageLambda: 2048
+    #  FYI https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-requirements-limits.html
+    timeout:
+      defaultLambda: 20
+      apiLambda: 15
+      imageLambda: 15
+    # https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html
+    # Transfer Acceleration で使用するバケットは、ピリオド (".") が含まれていない DNS 準拠の名前にする必要があります
+    enableS3Acceleration: false
+    build:
+      env:
+        NEXT_PUBLIC_CONTRACT_NAME: "dev-1660474152460-14596747053304"
+    tags:
+      env: ${stage}
+      project: awesome-rust-dapp

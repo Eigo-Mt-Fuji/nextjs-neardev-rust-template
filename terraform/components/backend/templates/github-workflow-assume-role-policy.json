@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect" : "Allow",
+            "Action" : "sts:AssumeRoleWithWebIdentity",
+            "Principal": {
+                "Federated" : "${federated_provider_id}"
+            },
+            "Condition": {
+                "StringLike": {
+                    "${oidc_provider}:${oidc_claim}": [
+                        "repo:${allowed_repo_awesome_rust_dapp}:${allowed_refs_awesome_rust_dapp}"
+                    ]
+                }
+            }
+        }
+    ]
+}

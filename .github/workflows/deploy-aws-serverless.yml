@@ -1,0 +1,42 @@
+name: Deploy AWS Serverless
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: test
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      # https://github.blog/changelog/2022-01-13-github-actions-update-on-oidc-based-deployments-to-aws/
+      # https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect
+      # https://github.com/aws-actions/configure-aws-credentials
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::047980477351:role/prdFxReportGithubWorkflow
+          aws-region: ap-northeast-1
+
+      - name: install packages
+        run: yarn install
+
+      - name: check lint
+        run: yarn run lint
+
+      - name: build
+        env:
+          NEXT_PUBLIC_CONTRACT_NAME: ${{secrets.NEXT_PUBLIC_CONTRACT_NAME}}
+        run: npm run build
+
+      - name: deploy 
+        env:
+          NEXT_PUBLIC_CONTRACT_NAME: ${{secrets.NEXT_PUBLIC_CONTRACT_NAME}}
+          SERVERLESS_ACCESS_KEY: ${{secrets.SERVERLESS_ACCESS_KEY}}
+          SLS_STAGE: ${{secrets.SLS_STAGE}}
+        run: "cd frontend/ && npm install && npm run deploy:serverless"

@@ -1,0 +1,54 @@
+name: Tests
+on: 
+  # see: https://docs.github.com/ja/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch
+  # see: https://docs.github.com/ja/rest/repos/repos#create-a-repository-dispatch-event
+  # repository_dispatch syntax is enabling(allowing) to call this workflow from externals via Github API
+  repository_dispatch:
+    types: [tests-report]
+  push:
+jobs:
+  tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16.16]
+        rust: [stable, 1.62]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          # https://github.com/actions/setup-node#supported-version-syntax
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          # https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+          # <channel>       = stable|beta|nightly|<major.minor>|<major.minor.patch>
+          toolchain: ${{ matrix.rust }}
+          # Platform Support WebAssembly Tier-2 https://doc.rust-lang.org/stable/rustc/platform-support.html#tier-2
+          target: wasm32-unknown-unknown
+
+      # https://docs.github.com/ja/actions/automating-builds-and-tests/building-and-testing-nodejs#example-using-npm
+      - name: Install modules
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Run integration tests
+        run: npm run test:integration:rs
+
+      # https://github.com/cypress-io/github-action 
+      # GitHub Action for running Cypress end-to-end tests. Includes NPM installation, custom caching and lots of configuration options
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          project: frontend
+          start: npm run dev:frontend
