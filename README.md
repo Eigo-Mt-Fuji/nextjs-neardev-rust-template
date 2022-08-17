@@ -6,19 +6,13 @@
 
 ## Environments
 
-- OS: macOS(>=10.15)
-- NodeJs>=16.16
-- Rust>=1.62
-- Terraform 1.2
-
-### Last  
-
 | Name | Version |
 |:----:|:----:|
-| OS | macOS 10.15.5(Intel Processor)  | 
+| OS | macOS 10.15.5(Intel)  | 
 | nodejs | 16.16.0  | 
 | rust | 1.62.1 |  
 | terraform | 1.2.7  | 
+| aws-cli | 2.5.3  | 
 
 ## How to use
 
