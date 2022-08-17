@@ -17,7 +17,11 @@
 | NextJs | 12.* |
 | React | 18.* |
 | Emotion/react | 11.* |
-    
+
+## Architecture Overview
+
+![img](./architecture.drawio.svg)
+
 ## How to use
 
 ### Smart contract build and deploy
