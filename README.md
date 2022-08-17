@@ -8,12 +8,16 @@
 
 | Name | Version |
 |:----:|:----:|
-| OS | macOS 10.15.5(Intel)  | 
-| nodejs | 16.16.0  | 
-| rust | 1.62.1 |  
-| terraform | 1.2.7  | 
-| aws-cli | 2.5.3  | 
-
+| `OS` | macOS 10.15.5(Intel)  | 
+| NodeJs | 16.16.0  | 
+| Rust | 1.62.1 |  
+| Terraform | 1.2.7  | 
+| Serverless Framework | 2.72.*  | 
+| AWS-cli | 2.5.3  | 
+| NextJs | 12.* |
+| React | 18.* |
+| Emotion/react | 11.* |
+    
 ## How to use
 
 ### Smart contract build and deploy
@@ -136,4 +140,87 @@ SLS_STAGE=test
 export SERVERLESS_ACCESS_KEY=my secret key
 source frontend/.env.local
 npm run deploy:serverless
+```
+
+## Note: Directory Tree
+
+- dAppフロントエンドソースコード置き場(Next.js)
+- サーバレスインフラコード(Serverless Framework)
+- dAppバックエンドソースコード置き場(NEAR Smart Contract)
+- スマートコントラクト結合テストコード
+- E2Eテストコード(Cypress)
+- IaCコード(Terraform)
+- CI/CD設定(Github Actions Workflow)
+- サーバレスインフラコード(Serverless Framework)
+
+```
+nextjs-neardev-rust-template
+
+├── README.md
+├── next-env.d.ts
+├── next.config.js
+├── package.json                      # ビルド・デプロイスクリプト(NPM script)
+├── package-lock.json
+├── tsconfig.json
+├── src                               # dAppフロントエンドソースコード置き場(Next.js)
+│   ├── components
+│   │   └── Form.tsx
+│   ├── near-env-config.ts
+│   ├── near-init-contract.ts
+│   ├── pages
+│   │   ├── _app.tsx
+│   │   ├── api
+│   │   └── index.tsx
+│   ├── public
+│   │   ├── favicon.ico
+│   │   └── vercel.svg
+│   ├── styles
+│   │   ├── Home.module.css
+│   │   └── globals.css
+│   └── types.ts
+├── contracts                        # dAppバックエンドソースコード置き場(NEAR Smart Contract)
+│   ├── Cargo.lock
+│   ├── Cargo.toml
+│   ├── integration-tests            # スマートコントラクト結合テストコード
+│   │   └── rs
+│   │       ├── Cargo.toml
+│   │       └── src
+│   │           └── tests.rs
+│   ├── neardev
+│   │   ├── dev-account
+│   │   └── dev-account.env
+│   ├── src
+│   │   └── lib.rs
+│   └── target
+│       └── wasm32-unknown-unknown
+├── cypress                          # E2Eテストコード(Cypress)
+│   ├── downloads
+│   ├── e2e
+│   │   ├── index.d.ts
+│   │   └── spec.cy.ts
+│   ├── fixtures
+│   │   └── example.json
+│   └── support
+│       ├── commands.ts
+│       └── e2e.ts
+├── cypress.config.js
+├── terraform                       # IaCコード(Terraform)
+│   └── components
+│       └── backend
+│           ├── README.md
+│           ├── apply.sh
+│           ├── iam.tf
+│           ├── main.tf
+│           ├── output.tf
+│           ├── providers.tf
+│           ├── templates
+│           │   ├── github-workflow-assume-role-policy.json
+│           │   └── github-workflow-iam-policy.json
+│           ├── terraform.plan
+│           └── variables.tf
+├── .github
+│   └── workflows                  # CI/CD設定(Github Actions Workflow)
+│           ├── deploy-aws-serverless.yml
+│           └── tests.yml
+└── serverless.test.yml            # サーバレスインフラ設定(Serverless Framework)
 ```
