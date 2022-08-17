@@ -20,7 +20,7 @@
 
 ## Architecture Overview
 
-![img](./architecture.drawio.svg)
+[![img](./architecture.png)](architecture.drawio.svg)
 
 ## How to use
 
