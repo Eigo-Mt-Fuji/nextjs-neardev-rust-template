@@ -1,8 +1,8 @@
 # README
 
-## Gitpod
+## About
 
-[Gitpod nextjs-neardev-rust-template](https://gitpod.io/#https://github.com/Eigo-Mt-Fuji/nextjs-neardev-rust-template)
+- My dApp template of NEAR Blockchain smart contract in Rust and frontend in Next.js(Typescript)
 
 ## Environments
 
@@ -148,14 +148,15 @@ npm run deploy:serverless
 
 ## Note: Directory Tree
 
-- dAppフロントエンドソースコード置き場(Next.js)
-- サーバレスインフラコード(Serverless Framework)
-- dAppバックエンドソースコード置き場(NEAR Smart Contract)
-- スマートコントラクト結合テストコード
-- E2Eテストコード(Cypress)
-- IaCコード(Terraform)
-- CI/CD設定(Github Actions Workflow)
-- サーバレスインフラコード(Serverless Framework)
+- Main component in japanese
+  - `dAppフロントエンドソースコード置き場(Next.js)`
+  - `サーバレスインフラコード(Serverless Framework)`
+  - `dAppバックエンドソースコード置き場(NEAR Smart Contract)`
+  - `スマートコントラクト結合テストコード`
+  - `E2Eテストコード(Cypress)`
+  - `IaCコード(Terraform)`
+  - `CI/CD設定(Github Actions Workflow)`
+  - `サーバレスインフラコード(Serverless Framework)`
 
 ```
 nextjs-neardev-rust-template
