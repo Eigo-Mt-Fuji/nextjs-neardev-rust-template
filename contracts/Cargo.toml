@@ -2,16 +2,15 @@
 name = "awesome-rust-dapp"
 version = "0.1.0"
 authors = ["e-fujikawa <efg.river@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
-[lib]
-# https://users.rust-lang.org/t/what-is-the-difference-between-dylib-and-cdylib/28847/3
-crate-type = ["cdylib", "rlib"]
-
-[dependencies]
+[dev-dependencies]
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 near-sdk = "4.0.0"
+near-contract-standards = "^3.1.1"
+
+steady-study-token = { path = "./steady-study-token" }
 
 [profile.release]
 codegen-units = 1
@@ -22,3 +21,10 @@ debug = false
 panic = "abort"
 # Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
 overflow-checks = true
+
+
+[workspace]
+members = [
+    "steady-study-token"
+]
+
