@@ -11,7 +11,6 @@ use near_contract_standards::fungible_token::core_impl::FungibleToken;
 use near_contract_standards::fungible_token::metadata::{
     FungibleTokenMetadata, FungibleTokenMetadataProvider, FT_METADATA_SPEC,
 };
-use near_sdk::json_types::ValidAccountId;
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
@@ -40,7 +39,7 @@ impl SteadyStudyTokenContract {
             FungibleTokenMetadata {
                 // ft-1.0.0
                 spec: FT_METADATA_SPEC.to_string(),
-                name: "Steady Study Token reward your works".to_string(),
+                name: "[Steady Study Token]reward your works".to_string(),
                 symbol: "STEADYST".to_string(),
                 icon: Some(DATA_IMAGE_SVG_NEAR_ICON.to_string()),
                 reference: None,
