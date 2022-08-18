@@ -7,7 +7,7 @@
     "build:frontend": "next build",
     "build": "npm run build:contract && npm run build:frontend",
     "postbuild:contract": "cd contracts && cp ./target/wasm32-unknown-unknown/release/steady_study_token.wasm ./res/",
-    "dev:deploy:contract": "npm run build && cd contracts && near dev-deploy res/steady_study_token.wasm && cd ../",
+    "dev:deploy:contract": "npm run build && cd contracts && near dev-deploy --wasmFile res/steady_study_token.wasm --initFunction new_default_meta --initArgs '{\"owner_id\": \"efgriver.testnet\", \"total_supply\": \"10000000\"}' && cd ../",
     "dev:frontend": "next dev",
     "dev": "npm run dev:deploy:contract && npm run dev:frontend",
     "start": "npm run build && next start",
