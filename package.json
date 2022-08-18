@@ -7,7 +7,7 @@
     "build:frontend": "next build",
     "build": "npm run build:contract && npm run build:frontend",
     "postbuild:contract": "cd contracts && cp ./target/wasm32-unknown-unknown/release/steady_study_token.wasm ./res/",
-    "dev:deploy:contract": "npm run build && cd contracts && near dev-deploy res/steady_study_token.wasm && source neardev/cd ../",
+    "dev:deploy:contract": "npm run build && cd contracts && near dev-deploy res/steady_study_token.wasm && cd ../",
     "dev:frontend": "next dev",
     "dev": "npm run dev:deploy:contract && npm run dev:frontend",
     "start": "npm run build && next start",
