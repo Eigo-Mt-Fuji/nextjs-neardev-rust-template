@@ -150,7 +150,8 @@ npm run deploy:serverless
 
 - [note - 最終日 - イーサリアム学ぶ夏休みのまとめ](https://note.com/efujikawa/n/n2f4f03ef03fd)
 - [note - Rust学習まとめ - テスト作成に入門する、等／学習のふりかえり](https://note.com/efujikawa/n/n0d2aa27b6bc7)
-
+- [note - ブロックチェーン自由研究 - NEARについて理解する](https://note.com/efujikawa/n/n1a6fbbb5d981?magazine_key=m970875a701ac)
+- 
 ## Note: Directory Tree
 
 - Main component in japanese
