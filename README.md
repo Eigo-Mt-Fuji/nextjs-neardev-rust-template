@@ -4,6 +4,13 @@
 
 - My dApp template of NEAR Blockchain smart contract in Rust and frontend in Next.js(Typescript)
 
+## Background
+
+- [note - Rust/DApp実習 - はじめました](https://note.com/efujikawa/n/n67d8c5d5b868?magazine_key=m2b7793629425)
+- [note - 最終日 - イーサリアム学ぶ夏休みのまとめ](https://note.com/efujikawa/n/n2f4f03ef03fd)
+- [note - Rust学習まとめ - テスト作成に入門する、等／学習のふりかえり](https://note.com/efujikawa/n/n0d2aa27b6bc7)
+- [note - ブロックチェーン自由研究 - NEARについて理解する](https://note.com/efujikawa/n/n1a6fbbb5d981?magazine_key=m970875a701ac)
+
 ## Environments
 
 | Name | Version |
@@ -146,12 +153,6 @@ source frontend/.env.local
 npm run deploy:serverless
 ```
 
-## Note: Study
-
-- [note - 最終日 - イーサリアム学ぶ夏休みのまとめ](https://note.com/efujikawa/n/n2f4f03ef03fd)
-- [note - Rust学習まとめ - テスト作成に入門する、等／学習のふりかえり](https://note.com/efujikawa/n/n0d2aa27b6bc7)
-- [note - ブロックチェーン自由研究 - NEARについて理解する](https://note.com/efujikawa/n/n1a6fbbb5d981?magazine_key=m970875a701ac)
-- 
 ## Note: Directory Tree
 
 - Main component in japanese
