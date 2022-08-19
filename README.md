@@ -146,6 +146,11 @@ source frontend/.env.local
 npm run deploy:serverless
 ```
 
+## Note: Study
+
+- [note - 最終日 - イーサリアム学ぶ夏休みのまとめ](https://note.com/efujikawa/n/n2f4f03ef03fd)
+- [note - Rust学習まとめ - テスト作成に入門する、等／学習のふりかえり](https://note.com/efujikawa/n/n0d2aa27b6bc7)
+
 ## Note: Directory Tree
 
 - Main component in japanese
