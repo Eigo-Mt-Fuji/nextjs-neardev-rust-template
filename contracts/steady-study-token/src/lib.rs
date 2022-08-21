@@ -77,6 +77,7 @@ impl SteadyStudyTokenContract {
     /// ft_report_study_commit 
     /// 
     pub fn ft_report_study_commit(&mut self, receiver_id: AccountId, memo: Option<String>, urls: &Vec<String>) {
+        
         // https://docs.rs/near-sdk/2.0.1/near_sdk/collections/struct.Vector.html#method.len
         require!(urls.len() == 3, "Need 3 urls commit.");
 
@@ -91,6 +92,7 @@ impl SteadyStudyTokenContract {
         for element in urls.iter() {
             self.used_urls.insert(element, &sender_account_id);
         }
+
         // 
         let owner_account_id = env::current_account_id();
         println!("owner_account_id: {}", &owner_account_id);
@@ -103,12 +105,8 @@ impl SteadyStudyTokenContract {
             1,
             memo
         );    
-
     }
 
-    pub fn ft_data_to_msg(&self, urls: &Vec<String> ) -> String {
-        json!({"urls":urls}).to_string()
-    }
     fn on_account_closed(&mut self, account_id: AccountId, balance: Balance) {
         log!("Closed @{} with {}", account_id, balance);
     }
@@ -145,22 +143,22 @@ mod tests {
     }
 
     #[test]
-    fn test_ft_data_to_msg() {
-        let context = get_context(accounts(1));
-        testing_env!(context.build());
-        let contract = SteadyStudyTokenContract::new_default_meta(accounts(1).into(), TOTAL_SUPPLY.into());
-
-        let data: Vec<String> = vec!["ipfs://hoge".to_string(), "ipfs://fuga".to_string(), "ipfs://poyo".to_string()];
-        let msg = contract.ft_data_to_msg(&data);
-        assert_eq!(msg, "{\"urls\":[\"ipfs://hoge\",\"ipfs://fuga\",\"ipfs://poyo\"]}");
-    }
-    #[test]
     #[should_panic(expected = "The contract is not initialized")]
     fn test_default() {
         let context = get_context(accounts(1));
         testing_env!(context.build());
         let _contract = SteadyStudyTokenContract::default();
     }
+    #[test]
+    fn test_new() {
+        let mut context = get_context(accounts(1));
+        testing_env!(context.build());
+        let contract = SteadyStudyTokenContract::new_default_meta(accounts(1).into(), TOTAL_SUPPLY.into());
+        testing_env!(context.is_view(true).build());
+        assert_eq!(contract.ft_total_supply().0, TOTAL_SUPPLY);
+        assert_eq!(contract.ft_balance_of(accounts(1)).0, TOTAL_SUPPLY);
+    }
+
     #[test]
     fn test_ft_report_study_commit() {
         let mut context = get_context(accounts(2));
