@@ -4,7 +4,6 @@ use near_sdk::{
     env, log, near_bindgen, require, AccountId, Balance, BorshStorageKey, PanicOnDefault,
     PromiseOrValue,
 };
-use serde_json::json;
 
 use near_sdk::collections::LazyOption;
 use near_sdk::json_types::U128;
