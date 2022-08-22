@@ -5,19 +5,19 @@ export interface NearUserView {
     balance: string;
 }
 
-export interface AppStatusMessageSetContext {
-    message: string;
-    account_id: string;
-}
-export interface AppStatusMessageGetContext {
-    account_id: string;
-}
-export interface NearContractStatusMessageMethods {
-    // see awesome-rust-dapp/src/lib.rs#StatusMessage.set_status
-    set_status: (context: AppStatusMessageSetContext, boatloadOfGas: string) => Promise<void>;
-    // see awesome-rust-dapp/src/lib.rs#StatusMessage.get_status
-    get_status: (context: AppStatusMessageGetContext) => Promise<string>
-}
+// export interface AppStatusMessageSetContext {
+//     message: string;
+//     account_id: string;
+// }
+// export interface AppStatusMessageGetContext {
+//     account_id: string;
+// }
+// export interface NearContractStatusMessageMethods {
+//     // see awesome-rust-dapp/src/lib.rs#StatusMessage.set_status
+//     set_status: (context: AppStatusMessageSetContext, boatloadOfGas: string) => Promise<void>;
+//     // see awesome-rust-dapp/src/lib.rs#StatusMessage.get_status
+//     get_status: (context: AppStatusMessageGetContext) => Promise<string>
+// }
 export interface NearCallFtBalanceOfContext {
     account_id: string;
 }
@@ -41,4 +41,3 @@ export interface FormProps {
     onSubmit: (event: any) => void,
     currentUser: NearUserView,
 }
-

@@ -16,7 +16,7 @@
     "lint:contract":"cd contracts/ && cargo clippy --workspace --fix && cd ../",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "npm run test:unit:contract",
-    "test:unit:contract": "cd contracts/ && cargo test --workspace -- --nocapture && cd ../",
+    "test:unit:contract": "cd contracts/ && cargo test --workspace --  --nocapture -Z unstable-options --format json --report-time | cargo2junit > res/test-report.xml && cd ../",
     "test:integration": "npm run test:integration:rs && npm run test:integration:ts",
     "test:integration:rs": "npm run build:contract && npm run postbuild:contract && cd contracts/integration-tests/rs && cargo run --example integration-tests",
     "test:integration:ts": "npm run build:frontend && cypress open",
