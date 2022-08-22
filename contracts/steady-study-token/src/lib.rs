@@ -19,6 +19,7 @@ use near_contract_standards::fungible_token::metadata::{
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 struct SteadyStudyTokenContract {
+    owner_id: AccountId,
     token: FungibleToken,
     metadata: LazyOption<FungibleTokenMetadata>,
     used_urls: UnorderedMap<String, AccountId>,
@@ -62,6 +63,7 @@ impl SteadyStudyTokenContract {
         assert!(!env::state_exists(), "Already initialized");
         metadata.assert_valid();
         let mut this = Self {
+            owner_id: owner_id.clone(),
             // near_contract_standards::fungible_token::core_impl::FungibleToken's new 
             token: FungibleToken::new(StorageKey::FungibleToken),
             metadata: LazyOption::new(StorageKey::Metadata, Some(&metadata)),
@@ -94,13 +96,13 @@ impl SteadyStudyTokenContract {
         }
 
         // 
-        let owner_account_id = env::current_account_id();
-        println!("owner_account_id: {}", &owner_account_id);
+        // let owner_account_id = env::current_account_id();
+        // println!("owner_account_id: {}", &owner_account_id);
         if self.token.accounts.get(&receiver_id) == None {
             self.token.internal_register_account(&receiver_id);
         }
         self.token.internal_transfer(
-            &owner_account_id,
+            &self.owner_id,
             &receiver_id,
             1,
             memo
