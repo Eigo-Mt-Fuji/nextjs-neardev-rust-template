@@ -38,7 +38,6 @@ export interface NearContractContext {
 }
 
 export interface FormProps {
-    onClickHello: (event: any) => void,
     onSubmit: (event: any) => void,
     currentUser: NearUserView,
 }
