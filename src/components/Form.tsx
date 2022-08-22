@@ -3,26 +3,40 @@ import {FormProps } from "../types";
 
 import {jsx, css} from "@emotion/react";
 
-export default function Form({ onSubmit, onClickHello, currentUser }: FormProps) {
+export default function Form({ onSubmit, currentUser }: FormProps) {
 
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
-        <p>Add or update your status message!</p>
+        <h2>{{ currentUser.accountId }}</h2>
+        <p>Put 3 note urls - your awesome study commit!</p>
         <p className="highlight">
-          <label htmlFor="message">Message:</label>
+          <label htmlFor="url1">Url#1:</label>
           <input
             autoComplete="off"
             autoFocus
-            id="message"
+            id="url1"
             required
           />
         </p>
-        <button css={css`
-          background-color: "#000000";
-          font-size: 20px;
-          color: "#ffffff";
-        `} onClick={onClickHello}>hello</button>
+        <p className="highlight">
+          <label htmlFor="url2">Url#2:</label>
+          <input
+            autoComplete="off"
+            autoFocus
+            id="url2"
+            required
+          />
+        </p>
+        <p className="highlight">
+          <label htmlFor="url3">Url#3:</label>
+          <input
+            autoComplete="off"
+            autoFocus
+            id="url3"
+            required
+          />
+        </p>
         <button type="submit">
           Update
         </button>

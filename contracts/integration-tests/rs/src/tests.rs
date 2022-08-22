@@ -41,14 +41,14 @@ async fn main() -> anyhow::Result<()> {
 }   
 
 async fn test_ft_total_supply(
-    owner: &Account,
+    _owner: &Account,
     user: &Account,
     contract: &Contract,
     worker: &Worker<Sandbox>,
 ) -> anyhow::Result<()> {
     println!("call ft_total_supply");
     let alice_status: String = user
-        .call(&worker, contract.id(), "ft_total_supply")
+        .call(worker, contract.id(), "ft_total_supply")
         .args_json(json!({ "account_id": user.id() }))?
         .transact()
         .await?
