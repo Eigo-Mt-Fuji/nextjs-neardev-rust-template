@@ -12,7 +12,7 @@
     "dev": "npm run dev:deploy:contract && npm run dev:frontend",
     "start": "npm run build && next start",
     "lint": "npm run lint:contract && npm run lint:frontend",
-    "lint:frontend":"next lint",
+    "lint:frontend":"next lint --fix",
     "lint:contract":"cd contracts/ && cargo clippy --workspace --fix && cd ../",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "npm run test:unit:contract",

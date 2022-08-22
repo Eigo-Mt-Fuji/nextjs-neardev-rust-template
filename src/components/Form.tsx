@@ -8,7 +8,7 @@ export default function Form({ onSubmit, currentUser }: FormProps) {
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
-        <h2>{{ currentUser.accountId }}</h2>
+        <h2>{currentUser.accountId}</h2>
         <p>Put 3 note urls - your awesome study commit!</p>
         <p className="highlight">
           <label htmlFor="url1">Url#1:</label>
