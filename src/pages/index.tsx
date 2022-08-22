@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { NextPage } from 'next'
-import styles from '../styles/Home.module.css'
-import Big from "big.js";
-import Form from "../components/Form";
-import * as nearAPI from 'near-api-js';
 
-import {NearUserView, NearContractContext, NearContractStatusMessageMethods} from "../types";
+import Form from "../components/Form";
+import styles from '../styles/Home.module.css'
+
+import * as nearAPI from 'near-api-js';
 import initContract from "../near-init-contract";
+import Big from "big.js";
+import {NearUserView, NearContractContext, SteadyStudyTokenContractMethods} from "../types";
 
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
 const Home: NextPage = () => {
 
-  const [status, setStatus] = useState<string|undefined>(undefined);
+  const [balance, setBalance] = useState<string|undefined>(undefined);
   const [nearContext, setNearContext] = useState<NearContractContext| undefined>(undefined);
 
   useEffect(() => {
@@ -23,21 +24,21 @@ const Home: NextPage = () => {
         initContract()
         .then(({ contract, currentUser, nearConfig, walletConnection }) => {
           setNearContext({
-            contract: contract as nearAPI.Contract & NearContractStatusMessageMethods,
+            contract: contract as nearAPI.Contract & SteadyStudyTokenContractMethods,
             currentUser,
             nearConfig,
             wallet: walletConnection,
           });
         });
-  
       }
   
       if (nearContext && nearContext.contract && nearContext.currentUser) {
-        const status = await nearContext.contract.get_status({
+        // call NEP-141 FungibleToken::ft_balance_of(&self)
+        const balance = await nearContext.contract.ft_balance_of({
           account_id: nearContext.currentUser.accountId
         });
   
-        setStatus(status);
+        setBalance(balance);
       }
     };
     if (nearContext == undefined) {
@@ -58,7 +59,7 @@ const Home: NextPage = () => {
     );
   }
 
-  const contract: NearContractStatusMessageMethods = nearContext.contract as NearContractStatusMessageMethods;
+  const contract = nearContext.contract as SteadyStudyTokenContractMethods;
   const currentUser: NearUserView = nearContext.currentUser as NearUserView;
   const wallet: nearAPI.WalletConnection = nearContext.wallet as nearAPI.WalletConnection;
 
@@ -66,9 +67,9 @@ const Home: NextPage = () => {
     wallet.requestSignIn(
       {
         contractId: nearContext.nearConfig.contractName, 
-        methodNames: ['set_status']
+        methodNames: ['ft_balance_of', 'ft_report_study_commit']
       },
-      "NEAR Status Message"
+      "SteadyStudyToken"
     );
   };
 
@@ -80,45 +81,43 @@ const Home: NextPage = () => {
   const onSubmit = async (event:any) => {
     event.preventDefault();
 
-    const { fieldset, message } = event.target.elements;
+    const { fieldset, url1, url2, url3 } = event.target.elements;
     fieldset.disabled = true;
 
     console.log(process.env.NEXT_PUBLIC_CONTRACT_NAME);
 
-    // call smartcontract set_status method.
-    await contract.set_status(
+    // call smartcontract set_balance method.
+    await contract.ft_report_study_commit(
       {
-        message: message.value,
-        account_id: currentUser.accountId
+        urls: [url1.value, url2.value, url3.value],
+        receiver_id: currentUser.accountId
       },
       BOATLOAD_OF_GAS
     );
 
-    // obtain status after smartcontract set_status success.
-    const status: string = await contract.get_status({
+    // obtain balance after smartcontract set_balance success.
+    const balance: string = await contract.ft_balance_of({
       account_id: currentUser.accountId
     });
-    setStatus(status);
+    setBalance(balance);
   
-    message.value = "";
+    url1.value = "";
+    url2.value = "";
+    url3.value = "";
     fieldset.disabled = false;
-    message.focus();
+    url1.focus();
   };
-
-  const onClickMyButton = (event: any) => {
-    alert("Hello");
-  }
 
   return (
     <div className={styles.container}>
       <main>
         <header>
-          <h1>NEAR Status Message</h1>
+          <h1>NEAR balance Message</h1>
 
           {nearContext.currentUser ?
             <p>Currently signed in as: <code>{nearContext.currentUser.accountId}</code></p>
           :
-            <p>Update or add a status message! Please login to continue.</p>
+            <p>Update or add a balance message! Please login to continue.</p>
           }
 
           { nearContext.currentUser
@@ -129,25 +128,24 @@ const Home: NextPage = () => {
 
         {nearContext.currentUser &&
           <Form
-            onClickHello={onClickMyButton}
             onSubmit={onSubmit}
             currentUser={nearContext.currentUser}
           />
         }
-        {status ?
+        {balance ?
           <>
-            <p>Your current status:</p>
+            <p>Your token balance:</p>
             <p>
               <code>
-                {status}
+                {balance}
               </code>
             </p>
-          </> : <p>No status message yet!</p>
+          </> : <p>No STEADYST token yet!</p>
         }
       </main>
     </div>
   );
  
-  }
+}
 
 export default Home

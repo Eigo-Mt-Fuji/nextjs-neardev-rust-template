@@ -33,7 +33,7 @@ awesomeRustDapp:
     enableS3Acceleration: false
     build:
       env:
-        NEXT_PUBLIC_CONTRACT_NAME: "dev-1660474152460-14596747053304"
+        NEXT_PUBLIC_CONTRACT_NAME: "dev-1661183045813-95408792232523"
     tags:
       env: ${stage}
       project: awesome-rust-dapp

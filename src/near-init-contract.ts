@@ -28,9 +28,9 @@ export default async function initContract() {
     // Initializing our contract APIs by contract name and configuration
     const options: ContractMethods = {
       // View methods are read-only – they don't modify the state, but usually return some value
-      viewMethods: ['get_status'],
+      viewMethods: ['ft_balance_of'],
       // Change methods can modify the state, but you don't receive the returned value when called
-      changeMethods: ['set_status'],
+      changeMethods: ['ft_report_study_commit'],
       // ContractMethods has no sender
       // // Sender is the account ID to initialize transactions.
       // // getAccountId() will return empty string if user is still unauthorized

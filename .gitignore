@@ -4,7 +4,8 @@ target
 .parcel-cache
 dist
 *.lock
-res/**
+contracts/res/**
+contracts/res/test-report.xml
 
 # IDE
 .idea
