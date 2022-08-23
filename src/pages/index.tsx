@@ -8,6 +8,10 @@ import * as nearAPI from 'near-api-js';
 import initContract from "../near-init-contract";
 import Big from "big.js";
 import {NearUserView, NearContractContext, SteadyStudyTokenContractMethods} from "../types";
+import { useSelector, useDispatch } from 'react-redux'
+
+import { add, update } from '../features/todos/todoSlice';
+
 
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
@@ -15,6 +19,8 @@ const Home: NextPage = () => {
 
   const [balance, setBalance] = useState<string|undefined>(undefined);
   const [nearContext, setNearContext] = useState<NearContractContext| undefined>(undefined);
+  const count = useSelector(state => state.todos.value)
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -113,6 +119,12 @@ const Home: NextPage = () => {
       <main>
         <header>
           <h1>NEAR balance Message</h1>
+          <button
+            aria-label="Add value"
+            onClick={(_event) => dispatch(add("hoge"))}
+          >
+            Add
+          </button>
 
           {nearContext.currentUser ?
             <p>Currently signed in as: <code>{nearContext.currentUser.accountId}</code></p>
