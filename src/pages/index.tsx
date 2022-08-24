@@ -9,7 +9,7 @@ import initContract from "../near-init-contract";
 import Big from "big.js";
 import {NearUserView, NearContractContext, SteadyStudyTokenContractMethods} from "../types";
 import { useSelector, useDispatch } from 'react-redux'
-
+import {RootState} from "../redux-store";
 import { add, update } from '../features/todos/todoSlice';
 
 
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 
   const [balance, setBalance] = useState<string|undefined>(undefined);
   const [nearContext, setNearContext] = useState<NearContractContext| undefined>(undefined);
-  const count = useSelector(state => state.todos.value)
+  const count = useSelector( (state: RootState) => state.todos.value)
   const dispatch = useDispatch()
 
   useEffect(() => {
