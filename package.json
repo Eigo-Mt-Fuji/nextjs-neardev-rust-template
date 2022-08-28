@@ -12,8 +12,8 @@
     "dev": "npm run dev:deploy:contract && npm run dev:frontend",
     "start": "npm run build && next start",
     "lint": "npm run lint:contract && npm run lint:frontend",
-    "lint:frontend":"next lint --fix",
-    "lint:contract":"cd contracts/ && cargo clippy --workspace --fix && cd ../",
+    "lint:frontend": "next lint --fix",
+    "lint:contract": "cd contracts/ && cargo clippy --workspace --fix && cd ../",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "npm run test:unit:contract",
     "test:unit:contract": "cd contracts/ && cargo test --workspace --  --nocapture -Z unstable-options --format json --report-time | cargo2junit > res/test-report.xml && cd ../",
@@ -25,8 +25,11 @@
   },
   "dependencies": {
     "@emotion/css": "^11.9.0",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.10.2",
+    "@mui/material": "^5.10.2",
+    "@reduxjs/toolkit": "^1.8.5",
     "big.js": "^5.2.2",
     "borsh": "^0.4.0",
     "env-cmd": "^10.1.0",
@@ -35,6 +38,8 @@
     "prop-types": "^15.7.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.2",
+    "redux-devtools-extension": "^2.13.9",
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
